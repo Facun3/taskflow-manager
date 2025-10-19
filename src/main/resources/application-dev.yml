@@ -1,0 +1,26 @@
+# Development environment configuration
+# This file contains settings specific to the development environment
+
+spring:
+  # Development-specific settings
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+# Logging for development
+logging:
+  level:
+    root: INFO
+    com.taskflow: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Application specific settings
+app:
+  name: TaskFlow API
+  version: 0.0.1-SNAPSHOT
+  description: Task Management REST API - Development Environment
+
