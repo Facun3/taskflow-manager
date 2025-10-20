@@ -201,3 +201,12 @@ README.html
 .exercism
 
 PROJECT_PLAN.md
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+
+# Docker volumes
+mysql_data/

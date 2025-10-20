@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: taskflow-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: taskflow_db
+      MYSQL_USER: taskflow_user
+      MYSQL_PASSWORD: taskflow_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - taskflow-network
+
+  # Opcional: phpMyAdmin para administrar la base de datos
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: taskflow-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: taskflow_user
+      PMA_PASSWORD: taskflow_pass
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    networks:
+      - taskflow-network
+
+volumes:
+  mysql_data:
+
+networks:
+  taskflow-network:
+    driver: bridge
